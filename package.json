@@ -68,5 +68,9 @@
   "np": {
     "contents": ".",
     "anyBranch": false
+  },
+  "dependencies": {
+    "clear-module": "^3.2.0",
+    "fs-extra": "^8.0.1"
   }
 }
