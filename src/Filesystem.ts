@@ -18,21 +18,16 @@ import * as clearModule from 'clear-module'
 
 /**
  * Filesystem class exposes a consistent API to create, read and delete
- * files during tests. Apart from the generic CRUD operations, it has
- * support for following.
+ * files during tests. Apart from the generic CRUD operations, it
+ * also takes care of the remove the modules from Node.js cache.
  *
- * 1. Ensures to clear the Node.js require cache if the created
- *    file is a module.
- * 2. Creating and loading `.env` file populates `process.env` object and this
- *    class will track those variables and removes them upon deletion of
- *    env file.
- *
- * ```
+ * ```js
  * const fs = new Filesystem()
  *
  * await fs.add('routes.js', `module.exports = 'routes'`)
  * await fs.remove('routes.js') // clears require cache
  *
+ * // do it after every test to cleanup all generated files
  * await fs.cleanup()
  * ```
  */
