@@ -1,5 +1,9 @@
-/*
- * @adonisjs/dev-utils
+/**
+ * @module @poppinss/dev-utils
+ */
+
+ /*
+ * @poppinss/dev-utils
  *
  * (c) Harminder Virk <virk@adonisjs.com>
  *
@@ -69,36 +73,9 @@ test.group('Filesystem', () => {
     await remove(fs.basePath)
   })
 
-  test('adding env file should track env keys', async (assert) => {
-    const fs = new Filesystem()
-
-    await fs.addEnv('.env', { PORT: '3333' })
-    const envContents = await fs.get('.env')
-
-    assert.equal(envContents, 'PORT=3333')
-    assert.deepEqual(fs['_envVars'].get(join(fs.basePath, '.env')), ['PORT'])
-
-    await remove(fs.basePath)
-  })
-
-  test('removing .env file should delete .env variables', async (assert) => {
-    const fs = new Filesystem()
-
-    await fs.addEnv('.env', { PORT: '3333' })
-    process.env.PORT = '3333'
-
-    await fs.remove('.env')
-    assert.isUndefined(process.env.PORT)
-
-    await remove(fs.basePath)
-  })
-
   test('cleanup all files from system basePath', async (assert) => {
     assert.plan(3)
     const fs = new Filesystem()
-
-    await fs.addEnv('.env', { PORT: '3333' })
-    process.env.PORT = '3333'
 
     await fs.add('hello.js', `module.exports = 'Hello world'`)
     await fs.cleanup()

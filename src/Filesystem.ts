@@ -1,5 +1,9 @@
+/**
+ * @module @poppinss/dev-utils
+ */
+
 /*
- * @adonisjs/dev-utils
+ * @poppinss/dev-utils
  *
  * (c) Harminder Virk <virk@adonisjs.com>
  *
@@ -29,15 +33,11 @@ import * as clearModule from 'clear-module'
  * await fs.add('routes.js', `module.exports = 'routes'`)
  * await fs.remove('routes.js') // clears require cache
  *
- * await fs.addEnv('.env', { PORT: '3333' })
- * await fs.remove('.env') // clears process.env.PORT
- *
  * await fs.cleanup()
  * ```
  */
 export class Filesystem {
   private _modules: Set<string> = new Set()
-  private _envVars: Map<string, string[]> = new Map()
 
   /**
    * Reference to fsExtra
@@ -87,20 +87,6 @@ export class Filesystem {
   }
 
   /**
-   * From env variables from `process.env` for the given file
-   */
-  private _removeFromEnv (filePath: string): void {
-    const absPath = this._makePath(filePath)
-    if (!this._envVars.has(absPath)) {
-      return
-    }
-
-    this._envVars.get(absPath)!.forEach((envVar) => {
-      delete process.env[envVar]
-    })
-  }
-
-  /**
    * Store reference of a given file to clear it from the
    * modules cache at a later stage
    */
@@ -110,13 +96,6 @@ export class Filesystem {
     }
 
     this._modules.add(this._makePath(filePath))
-  }
-
-  /**
-   * Track env keys in connection to a `.env` file
-   */
-  private _addToEnv (filePath: string, keys: string[]): void {
-    this._envVars.set(this._makePath(filePath), keys)
   }
 
   /**
@@ -144,20 +123,6 @@ export class Filesystem {
   }
 
   /**
-   * Create `.env` file and set it's contents from an object. Also this
-   * method will track all the env values, which are deleted from
-   * `process.env` upon file deletion.
-   */
-  public async addEnv (filePath: string = '.env', contents: { [key: string]: any }): Promise<void> {
-    const fileContents = Object.keys(contents).map((key) => {
-      return `${key}=${contents[key]}`
-    }).join('\n')
-
-    await this.add(filePath, fileContents)
-    await this._addToEnv(filePath, Object.keys(contents))
-  }
-
-  /**
    * Remove file
    */
   public async remove (filePath: string): Promise<void> {
@@ -170,8 +135,6 @@ export class Filesystem {
       this._removeFromModule(withoutExt)
       return
     }
-
-    this._removeFromEnv(filePath)
   }
 
   /**
@@ -182,10 +145,6 @@ export class Filesystem {
     this._modules.forEach((mod) => {
       this._removeFromModule(mod)
       this._removeFromModule(this._dropExt(mod))
-    })
-
-    this._envVars.forEach((_, envFile) => {
-      this._removeFromEnv(envFile)
     })
   }
 }
