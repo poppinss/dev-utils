@@ -70,7 +70,7 @@
     "anyBranch": false
   },
   "dependencies": {
-    "clear-module": "^3.2.0",
+    "clear-module": "^4.0.0",
     "fs-extra": "^8.0.1"
   }
 }
