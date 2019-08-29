@@ -73,5 +73,17 @@
     "@types/fs-extra": "^8.0.0",
     "clear-module": "^4.0.0",
     "fs-extra": "^8.1.0"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poppinss/dev-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/poppinss/dev-utils/issues"
+  },
+  "homepage": "https://github.com/poppinss/dev-utils#readme"
 }
