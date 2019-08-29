@@ -13,8 +13,8 @@
 
 import { join, extname, isAbsolute } from 'path'
 import { tmpdir } from 'os'
-import * as fsExtra from 'fs-extra'
-import * as clearModule from 'clear-module'
+import fsExtra from 'fs-extra'
+import clearModule from 'clear-module'
 
 /**
  * Filesystem class exposes a consistent API to create, read and delete

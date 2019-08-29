@@ -11,9 +11,9 @@
  * file that was distributed with this source code.
  */
 
-import * as test from 'japa'
-import { pathExists, remove } from 'fs-extra'
+import test from 'japa'
 import { join } from 'path'
+import { pathExists, remove } from 'fs-extra'
 import { Filesystem } from '../src/Filesystem'
 
 test.group('Filesystem', () => {
