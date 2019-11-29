@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "plugin:adonis/typescriptPackage"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error", { "overrides": { "constructors": "no-public" }}
+    ]
+  }
+}
