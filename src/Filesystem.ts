@@ -11,10 +11,10 @@
  * file that was distributed with this source code.
  */
 
-import { join, extname, isAbsolute } from 'path'
 import { tmpdir } from 'os'
 import fsExtra from 'fs-extra'
 import clearModule from 'clear-module'
+import { join, extname, isAbsolute } from 'path'
 
 /**
  * Filesystem class exposes a consistent API to create, read and delete
@@ -104,9 +104,16 @@ export class Filesystem {
   }
 
   /**
+   * Returns true when file exists on the disk
+   */
+  public async exists (filePath: string): Promise<boolean> {
+    return this.fsExtra.pathExists(this._makePath(filePath))
+  }
+
+  /**
    * Creates base path dir (if missing)
    */
-  public async ensureRoot () {
+  public async ensureRoot (): Promise<void> {
     return this.fsExtra.ensureDir(this.basePath)
   }
 
