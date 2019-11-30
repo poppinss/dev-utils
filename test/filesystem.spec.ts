@@ -2,7 +2,7 @@
  * @module @poppinss/dev-utils
  */
 
- /*
+/*
  * @poppinss/dev-utils
  *
  * (c) Harminder Virk <virk@adonisjs.com>
@@ -29,7 +29,7 @@ test.group('Filesystem', () => {
 
   test('adding js file should populate modules set', async (assert) => {
     const fs = new Filesystem()
-    await fs.add('hello.js', `module.exports = 'Hello world'`)
+    await fs.add('hello.js', 'module.exports = \'Hello world\'')
 
     const exists = await pathExists(join(fs.basePath, 'hello.js'))
 
@@ -42,7 +42,7 @@ test.group('Filesystem', () => {
   test('removing js file should clear it from node require cache', async (assert) => {
     const fs = new Filesystem()
 
-    await fs.add('foo.js', `module.exports = 'Hello world'`)
+    await fs.add('foo.js', 'module.exports = \'Hello world\'')
     assert.equal(require(join(fs.basePath, 'foo.js')), 'Hello world')
 
     /**
@@ -50,7 +50,7 @@ test.group('Filesystem', () => {
      */
     await fs.remove('foo.js')
 
-    await fs.add('foo.js', `module.exports = 'Hi world'`)
+    await fs.add('foo.js', 'module.exports = \'Hi world\'')
     assert.equal(require(join(fs.basePath, 'foo.js')), 'Hi world')
 
     await remove(fs.basePath)
@@ -59,7 +59,7 @@ test.group('Filesystem', () => {
   test('clean module from require cache, when required without extension', async (assert) => {
     const fs = new Filesystem()
 
-    await fs.add('foo.js', `module.exports = 'Hello world'`)
+    await fs.add('foo.js', 'module.exports = \'Hello world\'')
     assert.equal(require(join(fs.basePath, 'foo')), 'Hello world')
 
     /**
@@ -67,7 +67,7 @@ test.group('Filesystem', () => {
      */
     await fs.remove('foo.js')
 
-    await fs.add('foo.js', `module.exports = 'Hi world'`)
+    await fs.add('foo.js', 'module.exports = \'Hi world\'')
     assert.equal(require(join(fs.basePath, 'foo')), 'Hi world')
 
     await remove(fs.basePath)
@@ -77,7 +77,7 @@ test.group('Filesystem', () => {
     assert.plan(3)
     const fs = new Filesystem()
 
-    await fs.add('hello.js', `module.exports = 'Hello world'`)
+    await fs.add('hello.js', 'module.exports = \'Hello world\'')
     await fs.cleanup()
 
     const exists = await pathExists(fs.basePath)
@@ -99,6 +99,16 @@ test.group('Filesystem', () => {
     await fs.ensureRoot()
 
     const exists = await pathExists(fs.basePath)
+    assert.isTrue(exists)
+
+    await remove(fs.basePath)
+  })
+
+  test('find if file exists', async (assert) => {
+    const fs = new Filesystem()
+    await fs.add('hello.txt', 'Hello world')
+
+    const exists = await fs.exists('hello.txt')
     assert.isTrue(exists)
 
     await remove(fs.basePath)
