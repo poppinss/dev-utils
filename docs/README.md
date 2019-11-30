@@ -1,6 +1,6 @@
-**[@poppinss/dev-utils](README.md)**
+[@poppinss/dev-utils](README.md)
 
-[Globals](README.md)
+# @poppinss/dev-utils
 
 ## Index
 

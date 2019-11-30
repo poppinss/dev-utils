@@ -1,6 +1,4 @@
-**[@poppinss/dev-utils](../README.md)**
-
-[Globals](../README.md) › ["Filesystem"](../modules/_filesystem_.md) › [Filesystem](_filesystem_.filesystem.md)
+[@poppinss/dev-utils](../README.md) › ["Filesystem"](../modules/_filesystem_.md) › [Filesystem](_filesystem_.filesystem.md)
 
 # Class: Filesystem
 
@@ -38,6 +36,7 @@ await fs.cleanup()
 * [add](_filesystem_.filesystem.md#add)
 * [cleanup](_filesystem_.filesystem.md#cleanup)
 * [ensureRoot](_filesystem_.filesystem.md#ensureroot)
+* [exists](_filesystem_.filesystem.md#exists)
 * [get](_filesystem_.filesystem.md#get)
 * [remove](_filesystem_.filesystem.md#remove)
 
@@ -105,6 +104,22 @@ ___
 Creates base path dir (if missing)
 
 **Returns:** *Promise‹void›*
+
+___
+
+###  exists
+
+▸ **exists**(`filePath`: string): *Promise‹boolean›*
+
+Returns true when file exists on the disk
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`filePath` | string |
+
+**Returns:** *Promise‹boolean›*
 
 ___
 

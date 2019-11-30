@@ -1,11 +1,9 @@
-<div align="center">
-  <img src="https://res.cloudinary.com/adonisjs/image/upload/q_100/v1557762307/poppinss_iftxlt.jpg" width="600px">
-</div>
+<div align="center"><img src="https://res.cloudinary.com/adonisjs/image/upload/q_100/v1557762307/poppinss_iftxlt.jpg" width="600px"></div>
 
 # Dev utils
 > Collection of development utilities.
 
-[![circleci-image]][circleci-url] [![npm-image]][npm-url] ![][typescript-image] [![license-image]][license-url]
+[![circleci-image]][circleci-url] [![typescript-image]][typescript-url] [![npm-image]][npm-url] [![license-image]][license-url]
 
 This module exposes a collection of utilities that can be used during tests for easy development.
 
@@ -35,7 +33,7 @@ yarn add @poppinss/dev-utils
 ## Filesystem
 When writing tests, you may want to create some Javascript, or JSON files and then remove them after each test.
 
-The process seems straight forward, until you realize that Node.js caches the script files and remove a file from the disk, doesn't removes it from Node.js cache.
+The process seems straight forward, until you realize that Node.js caches the script files and removing a file from the disk, doesn't removes it from Node.js cache.
 
 ### The problem
 
@@ -51,7 +49,7 @@ test('do something', async () => {
 test('do something different', async () => {
   await fsExtra.outputFile('foo.js', `module.exports = 'bar'`)
   
-  require('foo.js') // returns 'foo' (coz the file is cached)
+  require('foo.js') // returns 'foo' (because the file is cached)
 })
 ```
 
@@ -93,10 +91,11 @@ The API docs are generated using Typedoc.
 [circleci-image]: https://img.shields.io/circleci/project/github/poppinss/dev-utils/master.svg?style=for-the-badge&logo=circleci
 [circleci-url]: https://circleci.com/gh/poppinss/dev-utils "circleci"
 
+[typescript-image]: https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript
+[typescript-url]:  "typescript"
+
 [npm-image]: https://img.shields.io/npm/v/@poppinss/dev-utils.svg?style=for-the-badge&logo=npm
 [npm-url]: https://npmjs.org/package/@poppinss/dev-utils "npm"
 
-[typescript-image]: https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript
-
-[license-url]: LICENSE.md
-[license-image]: https://img.shields.io/aur/license/pac.svg?style=for-the-badge
+[license-image]: https://img.shields.io/npm/l/@poppinss/dev-utils?color=blueviolet&style=for-the-badge
+[license-url]: LICENSE.md "license"

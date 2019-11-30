@@ -1,6 +1,4 @@
-**[@poppinss/dev-utils](../README.md)**
-
-[Globals](../README.md) › ["Filesystem"](_filesystem_.md)
+[@poppinss/dev-utils](../README.md) › ["Filesystem"](_filesystem_.md)
 
 # External module: "Filesystem"
 
