@@ -1,6 +1,6 @@
 {
   "name": "@poppinss/dev-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Development utilities",
   "scripts": {
     "mrm": "mrm --preset=@adonisjs/mrm-preset",
