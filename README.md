@@ -1,24 +1,25 @@
-<div align="center"><img src="https://res.cloudinary.com/adonisjs/image/upload/q_100/v1557762307/poppinss_iftxlt.jpg" width="600px"></div>
-
 # Dev utils
 > Collection of development utilities.
 
 [![circleci-image]][circleci-url] [![typescript-image]][typescript-url] [![npm-image]][npm-url] [![license-image]][license-url]
 
-This module exposes a collection of utilities that can be used during tests for easy development.
+A collection of utilities to make testing easier when developing packages. The package is written specially to cater the needs of the AdonisJS core team. 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of contents
 
+- [Available Utilities](#available-utilities)
 - [Installation](#installation)
 - [Filesystem](#filesystem)
   - [The problem](#the-problem)
   - [The solution](#the-solution)
 - [API Docs](#api-docs)
-- [Maintainers](#maintainers)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Available Utilities
+- [FileSystem](#filesystem)
 
 ## Installation
 Install the module from npm registry as follows:
@@ -84,9 +85,6 @@ The `fs.cleanup` method removes all the files created via `fs.add` and also remo
 The API docs are generated using Typedoc.
 
 * [API](docs/README.md)
-
-## Maintainers
-[Harminder virk](https://github.com/thetutlage)
 
 [circleci-image]: https://img.shields.io/circleci/project/github/poppinss/dev-utils/master.svg?style=for-the-badge&logo=circleci
 [circleci-url]: https://circleci.com/gh/poppinss/dev-utils "circleci"
