@@ -32,7 +32,7 @@ import { join, extname, isAbsolute } from 'path'
  * ```
  */
 export class Filesystem {
-  private _modules: Set<string> = new Set()
+  private modules: Set<string> = new Set()
 
   /**
    * Reference to fsExtra
@@ -46,30 +46,30 @@ export class Filesystem {
    * Returns a boolean telling if file extension is part
    * of a Node.js module
    */
-  private _isModule (filePath: string): boolean {
+  private isModule (filePath: string): boolean {
     return ['.js', '.ts', '.json'].includes(extname(filePath))
   }
 
   /**
    * Makes abs path to a given file
    */
-  private _makePath (filePath: string): string {
+  private makePath (filePath: string): string {
     return isAbsolute(filePath) ? filePath : join(this.basePath, filePath)
   }
 
   /**
    * Removes ext from the file path
    */
-  private _dropExt (filePath: string): string {
+  private dropExt (filePath: string): string {
     return filePath.replace(/\.\w+$/, '')
   }
 
   /**
    * Removes the file path from nodejs module cache
    */
-  private _removeFromModule (filePath: string): void {
-    const absPath = this._makePath(filePath)
-    this._modules.delete(absPath)
+  private removeFromModule (filePath: string): void {
+    const absPath = this.makePath(filePath)
+    this.modules.delete(absPath)
 
     /**
      * Clear module raises error if file is not
@@ -85,29 +85,29 @@ export class Filesystem {
    * Store reference of a given file to clear it from the
    * modules cache at a later stage
    */
-  private _addToModule (filePath: string): void {
-    if (!this._isModule(filePath)) {
+  private addToModule (filePath: string): void {
+    if (!this.isModule(filePath)) {
       return
     }
 
-    this._modules.add(this._makePath(filePath))
+    this.modules.add(this.makePath(filePath))
   }
 
   /**
    * Add a new file with given contents
    */
   public async add (filePath: string, contents: string): Promise<void> {
-    const absPath = this._makePath(filePath)
+    const absPath = this.makePath(filePath)
     await this.fsExtra.outputFile(absPath, contents)
 
-    this._addToModule(filePath)
+    this.addToModule(filePath)
   }
 
   /**
    * Returns true when file exists on the disk
    */
   public async exists (filePath: string): Promise<boolean> {
-    return this.fsExtra.pathExists(this._makePath(filePath))
+    return this.fsExtra.pathExists(this.makePath(filePath))
   }
 
   /**
@@ -121,20 +121,20 @@ export class Filesystem {
    * Returns file contents
    */
   public async get (filePath: string): Promise<string> {
-    return this.fsExtra.readFile(this._makePath(filePath), 'utf-8')
+    return this.fsExtra.readFile(this.makePath(filePath), 'utf-8')
   }
 
   /**
    * Remove file
    */
   public async remove (filePath: string): Promise<void> {
-    const absPath = this._makePath(filePath)
+    const absPath = this.makePath(filePath)
     await this.fsExtra.remove(absPath)
 
-    const withoutExt = this._dropExt(absPath)
-    if (this._modules.has(absPath) || this._modules.has(withoutExt)) {
-      this._removeFromModule(filePath)
-      this._removeFromModule(withoutExt)
+    const withoutExt = this.dropExt(absPath)
+    if (this.modules.has(absPath) || this.modules.has(withoutExt)) {
+      this.removeFromModule(filePath)
+      this.removeFromModule(withoutExt)
       return
     }
   }
@@ -144,9 +144,9 @@ export class Filesystem {
    */
   public async cleanup (): Promise<void> {
     await this.fsExtra.remove(this.basePath)
-    this._modules.forEach((mod) => {
-      this._removeFromModule(mod)
-      this._removeFromModule(this._dropExt(mod))
+    this.modules.forEach((mod) => {
+      this.removeFromModule(mod)
+      this.removeFromModule(this.dropExt(mod))
     })
   }
 }
