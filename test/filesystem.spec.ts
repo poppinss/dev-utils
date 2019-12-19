@@ -34,7 +34,7 @@ test.group('Filesystem', () => {
     const exists = await pathExists(join(fs.basePath, 'hello.js'))
 
     assert.isTrue(exists)
-    assert.deepEqual(Array.from(fs['_modules'].values()), [join(fs.basePath, 'hello.js')])
+    assert.deepEqual(Array.from(fs['modules'].values()), [join(fs.basePath, 'hello.js')])
 
     await remove(fs.basePath)
   })
