@@ -50,7 +50,7 @@ await fs.cleanup()
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`basePath` | string |  join(tmpdir(), `${new Date().getTime()}`) |
+`basePath` | string | join(tmpdir(), `${new Date().getTime()}`) |
 
 **Returns:** *[Filesystem](_filesystem_.filesystem.md)*
 
@@ -64,7 +64,7 @@ ___
 
 ###  fsExtra
 
-• **fsExtra**: *"/Users/virk/code/poppinss/dev-utils/node_modules/@types/fs-extra/index"* =  fsExtra
+• **fsExtra**: *"/Users/virk/code/poppinss/dev-utils/node_modules/@types/fs-extra/index"* = fsExtra
 
 Reference to fsExtra
 
