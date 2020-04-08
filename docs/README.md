@@ -4,6 +4,6 @@
 
 ## Index
 
-### External modules
+### Modules
 
 * ["Filesystem"](modules/_filesystem_.md)

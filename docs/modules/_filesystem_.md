@@ -1,6 +1,6 @@
 [@poppinss/dev-utils](../README.md) › ["Filesystem"](_filesystem_.md)
 
-# External module: "Filesystem"
+# Module: "Filesystem"
 
 ## Index
 
