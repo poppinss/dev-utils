@@ -1,7 +1,3 @@
-/**
- * @module @poppinss/dev-utils
- */
-
 /*
 *  @poppinss/dev-utils
 *
