@@ -15,6 +15,7 @@ A collection of utilities to make testing easier when developing packages. The p
   - [The problem](#the-problem)
   - [The solution](#the-solution)
 - [API Docs](#api-docs)
+- [Audit Report](#audit-report)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -40,17 +41,17 @@ The process seems straight forward, until you realize that Node.js caches the sc
 
 ```js
 test('do something', async () => {
-  await fsExtra.outputFile('foo.js', `module.exports = 'foo'`)
+	await fsExtra.outputFile('foo.js', `module.exports = 'foo'`)
 
-  // test code
+	// test code
 
-  await fsExtra.remove('foo.js')
+	await fsExtra.remove('foo.js')
 })
 
 test('do something different', async () => {
-  await fsExtra.outputFile('foo.js', `module.exports = 'bar'`)
-  
-  require('foo.js') // returns 'foo' (because the file is cached)
+	await fsExtra.outputFile('foo.js', `module.exports = 'bar'`)
+	
+	require('foo.js') // returns 'foo' (because the file is cached)
 })
 ```
 
@@ -63,19 +64,19 @@ import { Filesystem } from '@poppinss/dev-utils'
 const fs = new Filesystem()
 
 test.group((group) => {
-  group.afterEach(async () => {
-    await fs.cleanup()
-  })
+	group.afterEach(async () => {
+		await fs.cleanup()
+	})
 
-  test('do something', async () => {
-    await fs.add('foo.js', `module.exports = 'foo'`)
-    require(join(fs.basePath, 'foo.js')) // 'foo'
-  })
+	test('do something', async () => {
+		await fs.add('foo.js', `module.exports = 'foo'`)
+		require(join(fs.basePath, 'foo.js')) // 'foo'
+	})
 
-  test('do something', async () => {
-    await fs.add('foo.js', `module.exports = 'bar'`)
-    require(join(fs.basePath, 'foo.js')) // 'bar'
-  })
+	test('do something', async () => {
+		await fs.add('foo.js', `module.exports = 'bar'`)
+		require(join(fs.basePath, 'foo.js')) // 'bar'
+	})
 })
 ```
 
@@ -85,6 +86,9 @@ The `fs.cleanup` method removes all the files created via `fs.add` and also remo
 The API docs are generated using Typedoc.
 
 * [API](docs/README.md)
+
+## Audit Report
+[Click here](https://htmlpreview.github.io/?https://github.com/poppinss/dev-utils/blob/develop/npm-audit.html) to see the latest npm audit report.
 
 [circleci-image]: https://img.shields.io/circleci/project/github/poppinss/dev-utils/master.svg?style=for-the-badge&logo=circleci
 [circleci-url]: https://circleci.com/gh/poppinss/dev-utils "circleci"
