@@ -1,10 +1,15 @@
 {
-  "extends": [
-    "plugin:adonis/typescriptPackage"
-  ],
-  "rules": {
-    "@typescript-eslint/explicit-member-accessibility": [
-      "error", { "overrides": { "constructors": "no-public" }}
-    ]
-  }
+	"extends": ["plugin:adonis/typescriptPackage", "prettier", "prettier/@typescript-eslint"],
+	"rules": {
+		"@typescript-eslint/explicit-member-accessibility": [
+			"error",
+			{
+				"overrides": {
+					"constructors": "no-public"
+				}
+			}
+		],
+		"prettier/prettier": ["error"]
+	},
+	"plugins": ["prettier"]
 }
