@@ -1,7 +1,7 @@
-# Dev utils
+# Dev Utils
 > Collection of development utilities.
 
-[![circleci-image]][circleci-url] [![typescript-image]][typescript-url] [![npm-image]][npm-url] [![license-image]][license-url]
+[![circleci-image]][circleci-url] [![typescript-image]][typescript-url] [![npm-image]][npm-url] [![license-image]][license-url] [![audit-report-image]][audit-report-url]
 
 A collection of utilities to make testing easier when developing packages. The package is written specially to cater the needs of the AdonisJS core team. 
 
@@ -14,8 +14,6 @@ A collection of utilities to make testing easier when developing packages. The p
 - [Filesystem](#filesystem)
   - [The problem](#the-problem)
   - [The solution](#the-solution)
-- [API Docs](#api-docs)
-- [Audit Report](#audit-report)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -44,7 +42,6 @@ test('do something', async () => {
 	await fsExtra.outputFile('foo.js', `module.exports = 'foo'`)
 
 	// test code
-
 	await fsExtra.remove('foo.js')
 })
 
@@ -82,14 +79,6 @@ test.group((group) => {
 
 The `fs.cleanup` method removes all the files created via `fs.add` and also removes the modules from the cache.
 
-## API Docs
-The API docs are generated using Typedoc.
-
-* [API](docs/README.md)
-
-## Audit Report
-[Click here](https://htmlpreview.github.io/?https://github.com/poppinss/dev-utils/blob/develop/npm-audit.html) to see the latest npm audit report.
-
 [circleci-image]: https://img.shields.io/circleci/project/github/poppinss/dev-utils/master.svg?style=for-the-badge&logo=circleci
 [circleci-url]: https://circleci.com/gh/poppinss/dev-utils "circleci"
 
@@ -101,3 +90,6 @@ The API docs are generated using Typedoc.
 
 [license-image]: https://img.shields.io/npm/l/@poppinss/dev-utils?color=blueviolet&style=for-the-badge
 [license-url]: LICENSE.md "license"
+
+[audit-report-image]: https://img.shields.io/badge/-Audit%20Report-blueviolet?style=for-the-badge
+[audit-report-url]: https://htmlpreview.github.io/?https://github.com/poppinss/dev-utils/blob/develop/npm-audit.html "audit-report"
