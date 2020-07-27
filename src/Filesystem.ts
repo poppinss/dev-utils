@@ -65,6 +65,7 @@ export class Filesystem {
 	private removeFromModule(filePath: string): void {
 		const absPath = this.makePath(filePath)
 		this.modules.delete(absPath)
+		console.log('removeFromModule', { absPath })
 
 		/**
 		 * Clear module raises error if file is not
@@ -124,10 +125,15 @@ export class Filesystem {
 	 */
 	public async remove(filePath: string): Promise<void> {
 		const absPath = this.makePath(filePath)
+		console.log({ absPath })
 		await this.fsExtra.remove(absPath)
 
 		const withoutExt = this.dropExt(absPath)
+		console.log({ withoutExt })
+
 		if (this.modules.has(absPath) || this.modules.has(withoutExt)) {
+			console.log('has module')
+
 			this.removeFromModule(filePath)
 			this.removeFromModule(withoutExt)
 			return
