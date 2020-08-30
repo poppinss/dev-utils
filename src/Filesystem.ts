@@ -131,6 +131,8 @@ export class Filesystem {
 		const withoutExt = this.dropExt(absPath)
 		console.log({ withoutExt })
 
+		console.log(this.modules)
+
 		if (this.modules.has(absPath) || this.modules.has(withoutExt)) {
 			console.log('has module')
 
