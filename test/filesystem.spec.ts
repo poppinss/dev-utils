@@ -49,7 +49,7 @@ test.group('Filesystem', () => {
 		await fs.add('foo.js', "module.exports = 'Hi world'")
 		assert.equal(require(join(fs.basePath, 'foo.js')), 'Hi world')
 
-		await remove(fs.basePath)
+		await fs.cleanup()
 	})
 
 	test('clean module from require cache, when required without extension', async (assert) => {
@@ -66,7 +66,7 @@ test.group('Filesystem', () => {
 		await fs.add('foo.js', "module.exports = 'Hi world'")
 		assert.equal(require(join(fs.basePath, 'foo')), 'Hi world')
 
-		await remove(fs.basePath)
+		await fs.cleanup()
 	})
 
 	test('cleanup all files from system basePath', async (assert) => {
@@ -87,7 +87,7 @@ test.group('Filesystem', () => {
 			assert.equal(error.code, 'MODULE_NOT_FOUND')
 		}
 
-		await remove(fs.basePath)
+		await fs.cleanup()
 	})
 
 	test('create base path directory if missing', async (assert) => {
@@ -97,7 +97,7 @@ test.group('Filesystem', () => {
 		const exists = await pathExists(fs.basePath)
 		assert.isTrue(exists)
 
-		await remove(fs.basePath)
+		await fs.cleanup()
 	})
 
 	test('find if file exists', async (assert) => {
@@ -107,6 +107,6 @@ test.group('Filesystem', () => {
 		const exists = await fs.exists('hello.txt')
 		assert.isTrue(exists)
 
-		await remove(fs.basePath)
+		await fs.cleanup()
 	})
 })

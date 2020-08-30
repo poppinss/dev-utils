@@ -62,10 +62,9 @@ export class Filesystem {
 	/**
 	 * Removes the file path from nodejs module cache
 	 */
-	private removeFromModule(filePath: string): void {
+	private removeFromModulesCache(filePath: string): void {
 		const absPath = this.makePath(filePath)
 		this.modules.delete(absPath)
-		console.log('removeFromModule', { absPath })
 
 		/**
 		 * Clear module raises error if file is not
@@ -81,7 +80,7 @@ export class Filesystem {
 	 * Store reference of a given file to clear it from the
 	 * modules cache at a later stage
 	 */
-	private addToModule(filePath: string): void {
+	private trackModule(filePath: string): void {
 		if (!this.isModule(filePath)) {
 			return
 		}
@@ -96,7 +95,7 @@ export class Filesystem {
 		const absPath = this.makePath(filePath)
 		await this.fsExtra.outputFile(absPath, contents)
 
-		this.addToModule(filePath)
+		this.trackModule(filePath)
 	}
 
 	/**
@@ -125,19 +124,13 @@ export class Filesystem {
 	 */
 	public async remove(filePath: string): Promise<void> {
 		const absPath = this.makePath(filePath)
-		console.log({ absPath })
 		await this.fsExtra.remove(absPath)
 
 		const withoutExt = this.dropExt(absPath)
-		console.log({ withoutExt })
-
-		console.log(this.modules)
 
 		if (this.modules.has(absPath) || this.modules.has(withoutExt)) {
-			console.log('has module')
-
-			this.removeFromModule(filePath)
-			this.removeFromModule(withoutExt)
+			this.removeFromModulesCache(filePath)
+			this.removeFromModulesCache(withoutExt)
 			return
 		}
 	}
@@ -148,8 +141,8 @@ export class Filesystem {
 	public async cleanup(): Promise<void> {
 		await this.fsExtra.remove(this.basePath)
 		this.modules.forEach((mod) => {
-			this.removeFromModule(mod)
-			this.removeFromModule(this.dropExt(mod))
+			this.removeFromModulesCache(mod)
+			this.removeFromModulesCache(this.dropExt(mod))
 		})
 	}
 }
