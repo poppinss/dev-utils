@@ -14,7 +14,7 @@ import { Filesystem } from '../src/Filesystem'
 
 test.group('Filesystem', () => {
 	test('add new file to the disk', async (assert) => {
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 		await fs.add('hello.txt', 'Hello world')
 
 		const exists = await pathExists(join(fs.basePath, 'hello.txt'))
@@ -24,7 +24,7 @@ test.group('Filesystem', () => {
 	})
 
 	test('adding js file should populate modules set', async (assert) => {
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 		await fs.add('hello.js', "module.exports = 'Hello world'")
 
 		const exists = await pathExists(join(fs.basePath, 'hello.js'))
@@ -36,27 +36,27 @@ test.group('Filesystem', () => {
 	})
 
 	test('removing js file should clear it from node require cache', async (assert) => {
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 
-		await fs.add('foo.js', "module.exports = 'Hello world'")
-		assert.equal(require(join(fs.basePath, 'foo.js')), 'Hello world')
+		await fs.add('config/foo.js', "module.exports = 'Hello world'")
+		assert.equal(require('./app/config/foo.js'), 'Hello world')
 
 		/**
 		 * Should clean it from cache too
 		 */
-		await fs.remove('foo.js')
+		await fs.remove('config/foo.js')
 
-		await fs.add('foo.js', "module.exports = 'Hi world'")
-		assert.equal(require(join(fs.basePath, 'foo.js')), 'Hi world')
+		await fs.add('config/foo.js', "module.exports = 'Hi world'")
+		assert.equal(require('./app/config/foo.js'), 'Hi world')
 
 		await fs.cleanup()
 	})
 
 	test('clean module from require cache, when required without extension', async (assert) => {
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 
 		await fs.add('foo.js', "module.exports = 'Hello world'")
-		assert.equal(require(join(fs.basePath, 'foo')), 'Hello world')
+		assert.equal(require('./app/foo'), 'Hello world')
 
 		/**
 		 * Should clean it from cache too
@@ -64,14 +64,14 @@ test.group('Filesystem', () => {
 		await fs.remove('foo.js')
 
 		await fs.add('foo.js', "module.exports = 'Hi world'")
-		assert.equal(require(join(fs.basePath, 'foo')), 'Hi world')
+		assert.equal(require('./app/foo'), 'Hi world')
 
 		await fs.cleanup()
 	})
 
 	test('cleanup all files from system basePath', async (assert) => {
 		assert.plan(3)
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 
 		await fs.add('hello.js', "module.exports = 'Hello world'")
 		await fs.cleanup()
@@ -91,7 +91,7 @@ test.group('Filesystem', () => {
 	})
 
 	test('create base path directory if missing', async (assert) => {
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 		await fs.ensureRoot()
 
 		const exists = await pathExists(fs.basePath)
@@ -101,7 +101,7 @@ test.group('Filesystem', () => {
 	})
 
 	test('find if file exists', async (assert) => {
-		const fs = new Filesystem()
+		const fs = new Filesystem(join(__dirname, 'app'))
 		await fs.add('hello.txt', 'Hello world')
 
 		const exists = await fs.exists('hello.txt')

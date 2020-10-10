@@ -74,6 +74,8 @@ export class Filesystem {
 		try {
 			clearModule(absPath)
 		} catch (error) {}
+
+		delete require.cache[absPath]
 	}
 
 	/**
