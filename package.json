@@ -1,6 +1,6 @@
 {
 	"name": "@poppinss/dev-utils",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "Development utilities",
 	"main": "build/index.js",
 	"files": [
