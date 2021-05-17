@@ -2,7 +2,7 @@
 
 > Collection of development utilities.
 
-[![circleci-image]][circleci-url] [![typescript-image]][typescript-url] [![npm-image]][npm-url] [![license-image]][license-url] [![synk-image]][synk-url]
+[![gh-workflow-image]][gh-workflow-url] [![typescript-image]][typescript-url] [![npm-image]][npm-url] [![license-image]][license-url] [![synk-image]][synk-url]
 
 A collection of utilities to make testing easier when developing packages. The package is written specially to cater the needs of the AdonisJS core team.
 
@@ -84,13 +84,17 @@ test.group((group) => {
 
 The `fs.cleanup` method removes all the files created via `fs.add` and also removes the modules from the cache.
 
-[circleci-image]: https://img.shields.io/circleci/project/github/poppinss/dev-utils/master.svg?style=for-the-badge&logo=circleci
-[circleci-url]: https://circleci.com/gh/poppinss/dev-utils 'circleci'
+[gh-workflow-image]: https://img.shields.io/github/workflow/status/poppinss/dev-utils/test?style=for-the-badge
+[gh-workflow-url]: https://github.com/poppinss/dev-utils/actions/workflows/test.yml "Github action"
+
 [typescript-image]: https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript
 [typescript-url]: "typescript"
+
 [npm-image]: https://img.shields.io/npm/v/@poppinss/dev-utils.svg?style=for-the-badge&logo=npm
 [npm-url]: https://npmjs.org/package/@poppinss/dev-utils 'npm'
+
 [license-image]: https://img.shields.io/npm/l/@poppinss/dev-utils?color=blueviolet&style=for-the-badge
 [license-url]: LICENSE.md 'license'
+
 [synk-image]: https://img.shields.io/snyk/vulnerabilities/github/poppinss/dev-utils?label=Synk%20Vulnerabilities&style=for-the-badge
 [synk-url]: https://snyk.io/test/github/poppinss/dev-utils?targetFile=package.json 'synk'
